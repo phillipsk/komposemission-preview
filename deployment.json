@@ -1,5 +1,9 @@
 {
   "environment": "staging",
-  "source_commit": "f5d6ee32e3d1c6ffa7182ccbb038278eab5d5e07",
-  "packaged_at": "2026-11-02T20:48:27.681799+00:00"
+  "source_commit": "e18b8134697db9917661eee9dcb1bcb257771fa7",
+  "runtime_assets": [
+    "3ccc6015a4f9b1728f09.wasm",
+    "bccfa839aa4b38489c76.wasm"
+  ],
+  "packaged_at": "2026-11-02T21:20:02.565896+00:00"
 }

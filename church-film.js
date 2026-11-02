@@ -21,7 +21,12 @@
     video.playsInline = true;
     video.preload = 'metadata';
     video.poster = new URL('media/mission-film-poster.jpg', base).href;
-    video.src = new URL('media/mission-photo-story.mp4', base).href;
+    for (const [path, type] of [['media/mission-photo-story.webm', 'video/webm'], ['media/mission-photo-story.mp4', 'video/mp4']]) {
+      const source = document.createElement('source');
+      source.src = new URL(path, base).href;
+      source.type = type;
+      video.append(source);
+    }
     video.setAttribute('aria-label', 'Silent photo story of Mission Church, worship, and fellowship');
     const description = document.createElement('p');
     description.textContent = 'A silent photo story: our church building in Somerville, our congregation in worship, and fellowship inside the sanctuary. These are church photographs, presented with gentle motion.';
@@ -42,6 +47,7 @@
     dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
     dialog.addEventListener('close', () => {
       video.pause();
+      video.replaceChildren();
       video.removeAttribute('src');
       video.load();
       dialog.remove();

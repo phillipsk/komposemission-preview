@@ -64,7 +64,7 @@
   }, 30000);
 
   const script = document.createElement('script');
-  script.src = new URL('kompose-mission.js', bootstrapUrl).href;
+  script.src = new URL('kompose-mission.js?v=e18b8134697db9917661eee9dcb1bcb257771fa7', bootstrapUrl).href;
   script.addEventListener('error', () => {
     fail('bundle-unavailable', 'The app’s files could not be downloaded.');
   });
