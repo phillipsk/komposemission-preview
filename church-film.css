@@ -1,0 +1,11 @@
+.mission-film { box-sizing: border-box; width: min(960px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: auto; border: 1px solid #dfd1df; border-radius: 24px; padding: 24px; background: #faf7f2; color: #38233e; font: 16px/1.6 system-ui, sans-serif; box-shadow: 0 24px 100px #170d2166; }
+.mission-film::backdrop { background: #1d1225da; backdrop-filter: blur(8px); }
+.mission-film header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.mission-film h2 { margin: 0; font: 30px/1.2 Georgia, serif; }
+.mission-film button { border: 1px solid #c7b9ca; color: #38233e; background: #fff; border-radius: 100px; padding: 10px 18px; cursor: pointer; font: inherit; }
+.mission-film video { display: block; width: 100%; max-height: 62dvh; border-radius: 14px; background: #241627; }
+.mission-film p { color: #716774; }
+.mission-film a { color: #653f70; text-underline-offset: 4px; }
+.mission-film :focus-visible { outline: 3px solid #aa704a; outline-offset: 4px; }
+@media (prefers-reduced-motion: no-preference) { .mission-film[open] { animation: film-in 240ms ease-out; } @keyframes film-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } } }
+@media (max-width: 600px) { .mission-film { padding: 16px; border-radius: 16px; } .mission-film h2 { font-size: 24px; } }

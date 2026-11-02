@@ -1,0 +1,56 @@
+(() => {
+  const base = new URL('.', document.currentScript.src);
+  let dialog;
+  document.addEventListener('mission-film-open', () => {
+    if (dialog?.open) return;
+    const previousFocus = document.activeElement;
+    dialog = document.createElement('dialog');
+    dialog.className = 'mission-film';
+    dialog.setAttribute('aria-labelledby', 'film-title');
+    const header = document.createElement('header');
+    const title = document.createElement('h2');
+    title.id = 'film-title';
+    title.textContent = 'A glimpse of Mission';
+    const close = document.createElement('button');
+    close.textContent = 'Close ×';
+    close.setAttribute('aria-label', 'Close photo story');
+    close.addEventListener('click', () => dialog.close());
+    header.append(title, close);
+    const video = document.createElement('video');
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    video.poster = new URL('media/mission-film-poster.jpg', base).href;
+    video.src = new URL('media/mission-photo-story.mp4', base).href;
+    video.setAttribute('aria-label', 'Silent photo story of Mission Church, worship, and fellowship');
+    const description = document.createElement('p');
+    description.textContent = 'A silent photo story: our church building in Somerville, our congregation in worship, and fellowship inside the sanctuary. These are church photographs, presented with gentle motion.';
+    const fallback = document.createElement('a');
+    fallback.href = 'https://www.youtube.com/channel/UC-WFNdLaIzvjKeXmXTfOf3A';
+    fallback.target = '_blank';
+    fallback.rel = 'noopener noreferrer';
+    fallback.textContent = 'Watch church recordings on YouTube ↗';
+    const error = document.createElement('p');
+    error.hidden = true;
+    error.setAttribute('role', 'status');
+    error.textContent = 'This video could not load. You can watch church recordings using the YouTube link below.';
+    video.addEventListener('error', () => { error.hidden = false; });
+    dialog.append(header, video, description, error, fallback);
+    document.body.append(dialog);
+    const scrollBefore = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
+    dialog.addEventListener('close', () => {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+      dialog.remove();
+      document.body.style.overflow = scrollBefore;
+      if (previousFocus?.isConnected) previousFocus.focus();
+    }, { once: true });
+    dialog.showModal();
+    close.focus();
+    // Playback starts only after this explicit user action; no autoplay on page load.
+    video.play().catch(() => {});
+  });
+})();

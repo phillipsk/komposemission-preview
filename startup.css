@@ -1,0 +1,15 @@
+html, body, #app { width: 100%; height: 100%; margin: 0; }
+body { overflow: hidden; background: #faf7f2; color: #38233e; }
+#app { visibility: hidden; }
+html[data-boot-state="ready"] #app { visibility: visible; }
+#loading { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; font: 17px/1.6 system-ui, sans-serif; }
+.welcome-card { max-width: 460px; text-align: center; }
+.church-mark { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 14px; background: #38233e; color: #faf7f2; font-size: 40px; }
+h1 { margin-bottom: 12px; font-size: 30px; }
+#load-help { font-size: 14px; color: #716774; }
+.startup-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center; margin-top: 24px; }
+.startup-actions a { color: #38233e; text-underline-offset: 4px; }
+.startup-actions button { border: 0; border-radius: 6px; padding: 12px 22px; min-height: 44px; background: #38233e; color: white; font: inherit; cursor: pointer; }
+.startup-actions button[hidden] { display: none; }
+.startup-actions :focus-visible { outline: 3px solid #aa704a; outline-offset: 4px; }
+noscript { position: absolute; inset: 0; background: #faf7f2; padding: 32px; font: 18px system-ui, sans-serif; z-index: 9; }
